@@ -1,91 +1,82 @@
 # Neural Network Architectures: Single-Layer vs Deep MLPs
 
-This project compares the performance of a neural network with one hidden layer and a deep neural network (DNN) using the CelebA and MNIST datasets. The goal is to evaluate how network depth and regularization impact model accuracy and training efficiency.
+This project compares the performance of a neural network with one hidden layer and a deep neural network (DNN) using the CelebA and MNIST datasets. The objective is to analyze how architectural depth and regularization impact model accuracy and training efficiency.
 
 ## Project Overview
 
 This repository includes:
 
-- A NumPy-based single hidden layer neural network for both CelebA and MNIST datasets.
-- A PyTorch-based deep neural network (DNN) with configurable layer depth.
-- Plots and results for accuracy vs hidden units, regularization, training time, and model comparison.
-- Feature selection and hyperparameter tuning for regularization (lambda) and learning rate.
+- Skeleton implementations of neural networks in `.py` files for both CelebA and MNIST.
+- A consolidated Jupyter notebook `ML - PROJECT 1.ipynb` where all experiments, visualizations, and evaluations are conducted.
+- Feature selection, hyperparameter tuning, model comparison, and result analysis.
 
 ## File Structure
 
 ```
-├── face_nn.py               # Single hidden layer NN on CelebA (NumPy)
-├── dnn.py                   # Deep Neural Network using PyTorch (CelebA)
-├── nn_script.py             # Single hidden layer NN on MNIST (NumPy)
-├── face_all.pickle          # CelebA features and labels
-├── mnist_all.mat            # Raw MNIST dataset (MAT format)
-├── *.pkl                    # Pickled model parameters and evaluation results
-├── *.png                    # Accuracy/training time plots
+├── face_nn.py               # Single-layer NN (CelebA) - logic only
+├── dnn.py                   # Deep NN (CelebA, PyTorch) - logic only
+├── nn_script.py             # Single-layer NN (MNIST) - logic only
+├── ML - PROJECT 1.ipynb     # Main notebook with all runs and outputs
+├── face_all.pickle          # CelebA dataset
+├── mnist_all.mat            # MNIST dataset
+├── *.pkl                    # Model parameters and results
+├── *.png                    # Output plots
 └── README.md
 ```
 
 ## Datasets
 
-- **CelebA**: Binary classification (wearing glasses or not), with preprocessed features.
-- **MNIST**: Digit classification (0 to 9), loaded from MATLAB `.mat` file.
+- **CelebA**: Binary classification (wearing glasses or not), with pre-extracted features.
+- **MNIST**: Digit classification (0–9), loaded from MATLAB `.mat` file.
 
-## Models
+## Models Compared
 
-### Single-Layer Neural Network (face_nn.py, nn_script.py)
+### Single-Layer Neural Network
 
-- Developed using NumPy and SciPy
-- Trained using the Conjugate Gradient optimization algorithm
-- Tested on multiple configurations of hidden units and regularization values
-- Includes feature selection and saving of best parameters
+- Implemented in NumPy & SciPy (`face_nn.py`, `nn_script.py`)
+- Optimization using Conjugate Gradient
+- Hyperparameter tuning over hidden units and regularization (lambda)
 
-### Deep Neural Network (dnn.py)
+### Deep Neural Network (DNN)
 
-- Built with PyTorch
-- Configurable depth: 4, 12, and 20 hidden layers
-- Uses Batch Normalization, ReLU, and Dropout
-- Tuned for different learning rates: 0.5, 0.1, 0.01
+- Built using PyTorch (`dnn.py`)
+- Configurable number of layers: 4, 12, and 20
+- Uses ReLU, BatchNorm, Dropout
+- Trained with Adam optimizer
 
-## Results Summary
+## Results Overview
 
-| Model              | Dataset | Best Accuracy | Training Time | Best Configuration        |
-|-------------------|---------|---------------|----------------|----------------------------|
-| face_nn.py        | CelebA  | 85.29%        | 44.06 sec      | 1 hidden unit, lambda=12   |
-| dnn.py            | CelebA  | 86.41%        | 82.74 sec      | 12 layers, LR = 0.01       |
-| nn_script.py      | MNIST   | 93.57%        | 69.94 sec      | 20 hidden units, lambda=1  |
+| Model           | Dataset | Best Accuracy | Training Time | Best Config               |
+|----------------|---------|---------------|----------------|---------------------------|
+| face_nn        | CelebA  | 85.29%        | 44.06 sec      | 1 hidden unit, λ = 12     |
+| dnn            | CelebA  | 86.41%        | 82.74 sec      | 12 layers, LR = 0.01      |
+| nn_script      | MNIST   | 93.57%        | 69.94 sec      | 20 hidden units, λ = 1    |
 
 ## Visualizations
 
-Several plots were generated to compare:
+Included in the notebook:
 
-- Validation Accuracy vs. Regularization (lambda)
-- Validation Accuracy vs. Number of Hidden Units
-- Validation Accuracy vs. Number of Layers (DNN)
-- Training Time vs. Number of Layers (DNN)
-
-These are included in the output section and referenced in the final report.
+- Accuracy vs Regularization (λ)
+- Accuracy vs Hidden Units
+- Accuracy vs Number of Layers (DNN)
+- Training Time vs Number of Layers (DNN)
 
 ## How to Run
 
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/yourusername/nn-vs-dnn-comparison
    cd nn-vs-dnn-comparison
    ```
 
-2. Install required packages:
-   ```
+2. Install the required packages:
+   ```bash
    pip install numpy scipy matplotlib torch
    ```
 
-3. Run the scripts:
-   ```
-   python face_nn.py
-   python dnn.py
-   python nn_script.py
+3. Open the notebook:
+   ```bash
+   jupyter notebook "ML - PROJECT 1.ipynb"
    ```
 
-## Notes
-
-- Preprocessing includes normalization and variance-based feature selection.
-- All scripts save their best-performing model parameters and selected features in `.pickle` files.
-- Training logs and output plots help support the analysis and comparison.
+> Note: The `.py` files serve as modular logic, but **all execution, plots, tuning, and comparisons are done in the notebook**.
